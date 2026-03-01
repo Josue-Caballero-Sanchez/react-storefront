@@ -17,7 +17,7 @@ function Header() {
           <a
             className={styles.nav__item}
             href="#items"
-            onClick={() => setIsNavActive(false)}
+            onClick={(): void => setIsNavActive(false)}
           >
             <CiShoppingTag />
             <p>Shop</p>
@@ -25,7 +25,7 @@ function Header() {
           <a
             className={styles.nav__item}
             href="#"
-            onClick={() => setIsNavActive(false)}
+            onClick={(): void => setIsNavActive(false)}
           >
             <CiHeart />
             <p>Favorites</p>
@@ -33,7 +33,7 @@ function Header() {
           <a
             className={styles.nav__item}
             href="#"
-            onClick={() => setIsNavActive(false)}
+            onClick={(): void => setIsNavActive(false)}
           >
             <IoCartOutline />
             <p>Cart</p>
@@ -43,7 +43,7 @@ function Header() {
         <a
           href="#"
           className={styles.header__toggle__button}
-          onClick={() => setIsNavActive(!isNavActive)}
+          onClick={(): void => setIsNavActive(!isNavActive)}
         >
           <div className={styles.bar}></div>
           <div className={styles.bar}></div>

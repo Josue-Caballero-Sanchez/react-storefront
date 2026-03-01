@@ -1,0 +1,81 @@
+.container {
+  background-color: rgb(28, 28, 28);
+  font-size: 1.6rem;
+  color: white;
+}
+
+.main__container {
+  display: flex;
+  max-width: 90rem;
+  margin: 0 auto;
+  padding: 1.75rem;
+  gap: 10rem;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.left__container > h1{
+  font-size: 4rem;
+  margin-bottom: 0.5rem;
+}
+
+.left__container > p {
+  margin-bottom: 3rem;
+}
+
+.left__container > a {
+  display: inline-block;
+  background-color: #0071E3;
+  border: none;
+  padding: 1rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  border-radius: 1rem;
+  color: white;
+  text-decoration: none;
+
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.left__container > a:hover {
+  cursor: pointer;
+  opacity: 0.7;
+  transform: translateY(-1px);
+}
+
+.right__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 1rem;  
+}
+
+.icon {
+  font-size: 10rem;
+  background-color: rgb(50, 50, 50);
+  border-radius: 2rem;
+  padding: 2rem;
+  transition: transform 0.2s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+  cursor: default;
+}
+
+.icon:hover {
+  box-shadow: 0 20px 40px rgba(255,255,255,0.05);
+}
+
+@media (max-width: 768px) {
+  .main__container {
+    flex-direction: column;
+    gap: 3rem;
+    padding-top: 0.25rem;
+  }
+
+  .icon {
+    font-size: 6rem;
+    padding: 1rem;
+  }
+} 
