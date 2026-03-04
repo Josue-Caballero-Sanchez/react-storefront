@@ -11,10 +11,10 @@ function HomeFilters() {
         <button>Clothes</button>
         <button>Electronics</button>
       </div>
-      <p className={styles.category__text}>
+      <div className={styles.category__text}>
         All Items
         <p className={styles.count__text}>(8)</p>
-      </p>
+      </div>
     </div>
   );
 }

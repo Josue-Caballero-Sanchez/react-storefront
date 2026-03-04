@@ -1,8 +1,29 @@
 import styles from "./HomeItems.module.css";
 import { IoCartOutline } from "react-icons/io5";
 import { CiHeart } from "react-icons/ci";
+import { useEffect, useState } from "react";
 
 function HomeItems() {
+  const [data, setData] = useState<any[]>([]);
+  const [loading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    async function FetchAllItems() {
+      try {
+        const response = await fetch("http://localhost:5000/");
+        const fetchedData = await response.json();
+        if (!response.ok) {
+          throw new Error(`Error fetching items: ${fetchedData.message}`);
+        }
+        setData(fetchedData);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    FetchAllItems();
+  }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.item}>
