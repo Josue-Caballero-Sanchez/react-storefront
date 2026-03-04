@@ -1,0 +1,40 @@
+.buttons__container {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.buttons__container > button {
+  padding: 0.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  font-size: 1.3rem;
+  border: none;
+  background-color: lightgray;
+  cursor: pointer;
+  border-radius: 0.75rem;
+}
+
+.buttons__container > button:hover {
+  opacity: 0.7;
+}
+
+.buttons__container .active {
+  background-color: #0071E3;
+  color: white;
+}
+
+.category__text {
+  font-size: 2.75rem;
+  margin-bottom: 0.5rem;  
+  color: black;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.count__text {
+  color: gray;
+  font-size: 1.6rem;
+}

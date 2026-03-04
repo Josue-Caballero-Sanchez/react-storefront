@@ -8,6 +8,12 @@ function Header() {
 
   return (
     <header className={styles.header}>
+      {isNavActive && (
+        <div
+          onClick={(): void => setIsNavActive(false)}
+          className={styles.overlay}
+        ></div>
+      )}
       <div className={styles.header__container}>
         <a className={styles.logo} href="#">
           Shopp
@@ -16,7 +22,7 @@ function Header() {
         <nav className={isNavActive ? styles.nav__active : ""}>
           <a
             className={styles.nav__item}
-            href="#items"
+            href="#filters"
             onClick={(): void => setIsNavActive(false)}
           >
             <CiShoppingTag />
