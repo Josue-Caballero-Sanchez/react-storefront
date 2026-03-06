@@ -3,6 +3,7 @@
   gap: 0.5rem;
   flex-wrap: wrap;
   margin-bottom: 3rem;
+  margin-top: 2rem;
 }
 
 .buttons__container > button {

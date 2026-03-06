@@ -5,11 +5,10 @@ function HomeFilters() {
     <div id="filters">
       <div className={styles.buttons__container}>
         <button className={styles.active}>All</button>
-        <button>Electronics</button>
-        <button>Clothes</button>
-        <button>Electronics</button>
-        <button>Clothes</button>
-        <button>Electronics</button>
+        <button>Furniture</button>
+        <button>Beauty</button>
+        <button>Groceries</button>
+        <button>Fragrances</button>
       </div>
       <div className={styles.category__text}>
         All Items
