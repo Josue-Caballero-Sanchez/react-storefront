@@ -21,6 +21,10 @@
   transform: translateY(-1.5px);
 }
 
+.item:hover .title__text {
+  color: #0071E3;
+}
+
 .item__details {
   padding: 1.25rem;
   font-size: 1.6rem;
@@ -37,7 +41,7 @@
   background-color: #0071E3;
   color: white;
   border: none;
-  padding: 0.6rem;
+  padding: 0.55rem;
   border-radius: 2rem;
   cursor: pointer;
   width: 100%;

@@ -1,10 +1,18 @@
 import styles from "./Header.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CiHeart, CiShoppingTag } from "react-icons/ci";
 import { IoCartOutline } from "react-icons/io5";
 
 function Header() {
   const [isNavActive, setIsNavActive] = useState(false);
+
+  useEffect(() => {
+    if (!isNavActive) return;
+
+    const handleScroll = () => setIsNavActive(false);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isNavActive]);
 
   return (
     <header className={styles.header}>
