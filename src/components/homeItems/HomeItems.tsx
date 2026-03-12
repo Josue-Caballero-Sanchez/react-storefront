@@ -1,33 +1,39 @@
 import styles from "./HomeItems.module.css";
 import { IoCartOutline } from "react-icons/io5";
 import { CiHeart } from "react-icons/ci";
-import { useEffect, useState } from "react";
+import { ThreeDot } from "react-loading-indicators";
+import { TbFaceIdError } from "react-icons/tb";
 
-const BASE_API_URL = import.meta.env.VITE_API_URL;
+type HomeItemProps = {
+  products: any[];
+  loading: boolean;
+  errorMessage: string;
+};
 
-function HomeItems() {
-  const [products, setProducts] = useState<any[]>([]);
+function HomeItems({ products, loading, errorMessage }: HomeItemProps) {
+  if (loading) {
+    return (
+      <div className={styles.message__container}>
+        <ThreeDot
+          variant="bounce"
+          color="#000000"
+          size="large"
+          text=""
+          textColor=""
+        />
+        <p>Loading...</p>
+      </div>
+    );
+  }
 
-  useEffect(() => {
-    async function fetchAllProducts(): Promise<void> {
-      try {
-        const response = await fetch(`${BASE_API_URL}/products`);
-
-        if (!response.ok) {
-          console.error(`HTTP error! status: ${response.status}`);
-          return;
-        }
-
-        const data = await response.json();
-        console.log(data);
-        setProducts(data);
-      } catch (error) {
-        console.error("Error fetching products: ", error);
-      }
-    }
-
-    fetchAllProducts();
-  }, []);
+  if (errorMessage !== "") {
+    return (
+      <div className={styles.message__container}>
+        <TbFaceIdError className={styles.error__icon} />
+        <p className={styles.error__message}>{errorMessage}</p>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.container}>

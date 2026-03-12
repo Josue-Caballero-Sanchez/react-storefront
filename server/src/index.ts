@@ -6,14 +6,11 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT;
+const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS?.split(",").map(origin => origin.trim());
 
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin) {
-      return callback(null, true);
-    }
-
-    if (origin === process.env.ALLOWED_ORIGIN) {
+    if (!origin || ALLOWED_ORIGINS?.includes(origin)) {
       callback(null, true);
     }
     else {

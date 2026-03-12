@@ -1,6 +1,15 @@
 import styles from "./HomeFilters.module.css";
 
-function HomeFilters() {
+type HomeFiltersProps = {
+  loading: boolean;
+  errorMessage: string;
+};
+
+function HomeFilters({ loading, errorMessage }: HomeFiltersProps) {
+  if (loading || errorMessage !== "") {
+    return <></>;
+  }
+
   return (
     <div id="filters">
       <div className={styles.buttons__container}>
