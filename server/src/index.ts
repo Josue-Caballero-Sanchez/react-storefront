@@ -4,10 +4,13 @@ import cors from "cors";
 
 dotenv.config();
 
+const productsRouter = require("./routes/products");
 const app = express();
 const PORT = process.env.PORT;
 const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS?.split(",").map(origin => origin.trim());
 
+
+// Middleware
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin || ALLOWED_ORIGINS?.includes(origin)) {
@@ -20,26 +23,16 @@ app.use(cors({
   credentials: true,
 }));
 
-app.get('/', (req: Request, res: Response): void => {
-  res.send("Hello, world from server!");
+app.use('/products', productsRouter);
+
+// Requests
+app.get("/health", (req: Request, res: Response): void => {
+  res.status(200).json({
+    status: "ok",
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString(),
+  });
 });
-
-app.get('/products', async (req: Request, res: Response): Promise<void> => {
-  try {
-    const response = await fetch("https://dummyjson.com/products");
-
-    if(!response.ok){
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    res.send(data.products);
-  }
-  catch (error) {
-    console.error("Error fetching products: ", error);
-    res.status(500).send("Failed to fetch products");
-  }
-})
 
 app.listen(PORT, (): void => {
   console.log(`Server is running on http://localhost:${PORT}`);
