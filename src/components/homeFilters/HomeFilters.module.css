@@ -28,7 +28,6 @@
 
 .category__text {
   font-size: 2.75rem;
-  margin-bottom: 0.5rem;  
   color: black;
   display: flex;
   align-items: center;
@@ -38,4 +37,93 @@
 .count__text {
   color: gray;
   font-size: 1.6rem;
+  margin-top: 0.25rem;
+}
+
+.bottom__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+
+.bottom__container p {
+  color: black;
+  font-size: 1.4rem;
+  color: gray;
+}
+
+.sort__container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dropdown {
+  border: none;
+  background-color: lightgray;
+  font-size: 1.4rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  height: 3rem;
+  padding: 1rem;
+}
+
+.dropdown:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.dropdown__container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.dropdown__menu {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  background-color: lightgray;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  z-index: 1;
+  white-space: nowrap;
+  animation: dropdownOpen 0.25s ease;
+}
+
+@keyframes dropdownOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown__menu > button {
+  border: none;
+  background-color: lightgray;
+  font-size: 1.3rem;
+  padding: 0.4rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  border-radius: 0.75rem;
+}
+
+.dropdown__menu > button:hover {
+  background-color: white;
+}
+
+
+@media (max-width: 768px) {
+  .sort__container {
+    display: none;
+  }
 }

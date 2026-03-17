@@ -137,7 +137,7 @@
 .message__container {
   display: flex;
   align-items: center;
-  margin-top: 15rem;
+  margin-top: 10rem;
   height: 85vh;
   flex-direction: column;
   padding-left: 1.75rem;
