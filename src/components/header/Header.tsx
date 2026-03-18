@@ -2,17 +2,11 @@ import styles from "./Header.module.css";
 import { useState, useEffect } from "react";
 import { CiHeart, CiShoppingTag } from "react-icons/ci";
 import { IoCartOutline } from "react-icons/io5";
+import { useCartContext } from "../../contexts/CartContext";
 
 function Header() {
   const [isNavActive, setIsNavActive] = useState(false);
-
-  useEffect(() => {
-    if (!isNavActive) return;
-
-    const handleScroll = () => setIsNavActive(false);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isNavActive]);
+  const cart = useCartContext();
 
   return (
     <header className={styles.header}>
@@ -26,7 +20,7 @@ function Header() {
         <a className={styles.logo} href="#">
           Shopp
         </a>
-        <input type="search" placeholder="Search products..." />
+        <input id="search" type="search" placeholder="Search products..." />
         <nav className={isNavActive ? styles.nav__active : ""}>
           <a
             className={styles.nav__item}
@@ -51,18 +45,22 @@ function Header() {
           >
             <IoCartOutline />
             <p>Cart</p>
+            {cart.cartItems.length > 0 && (
+              <div className={styles.item__count__container}>
+                <p className={styles.item__count}>{cart.cartItems.length}</p>
+              </div>
+            )}
           </a>
         </nav>
 
-        <a
-          href="#"
+        <button
           className={styles.header__toggle__button}
           onClick={(): void => setIsNavActive(!isNavActive)}
         >
           <div className={styles.bar}></div>
           <div className={styles.bar}></div>
           <div className={styles.bar}></div>
-        </a>
+        </button>
       </div>
     </header>
   );

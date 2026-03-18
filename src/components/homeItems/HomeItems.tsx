@@ -1,10 +1,13 @@
 import styles from "./HomeItems.module.css";
+import { useCartContext } from "../../contexts/CartContext";
+import type { Item } from "../../contexts/CartContext";
 import { IoCartOutline } from "react-icons/io5";
 import { CiHeart } from "react-icons/ci";
 import { ThreeDot } from "react-loading-indicators";
 import { TbFaceIdError } from "react-icons/tb";
 import { IoReload } from "react-icons/io5";
 import { VscError } from "react-icons/vsc";
+import { MdOutlineRemoveShoppingCart } from "react-icons/md";
 
 type HomeItemProps = {
   products: any[];
@@ -14,6 +17,16 @@ type HomeItemProps = {
 };
 
 function HomeItems({ products, loading, errorMessage, reload }: HomeItemProps) {
+  const cart = useCartContext();
+
+  function handleAddItemButton(item: Item) {
+    if (!cart.isItemInCart(item.id, item.name)) {
+      cart.addItemToCart(item);
+    } else {
+      cart.removeItemFromCart(item);
+    }
+  }
+
   if (loading) {
     return (
       <div className={styles.message__container}>
@@ -89,9 +102,31 @@ function HomeItems({ products, loading, errorMessage, reload }: HomeItemProps) {
               )}
             </div>
             <div>
-              <button>
-                <IoCartOutline />
-                Add to Cart
+              <button
+                className={
+                  cart.isItemInCart(product.id, product.title)
+                    ? styles.disabled__button
+                    : ""
+                }
+                onClick={(): void =>
+                  handleAddItemButton({
+                    id: product.id,
+                    name: product.title,
+                    price: product.price,
+                  })
+                }
+              >
+                {cart.isItemInCart(product.id, product.title) ? (
+                  <span key="remove" className={styles.button__content}>
+                    <MdOutlineRemoveShoppingCart />
+                    Remove from Cart
+                  </span>
+                ) : (
+                  <span key="add" className={styles.button__content}>
+                    <IoCartOutline />
+                    Add to Cart
+                  </span>
+                )}
               </button>
               <button className={styles.favorite__button}>
                 <CiHeart />
