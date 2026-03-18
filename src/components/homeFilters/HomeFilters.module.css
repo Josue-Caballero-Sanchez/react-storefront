@@ -126,4 +126,12 @@
   .sort__container {
     display: none;
   }
+
+  .buttons__container {
+    margin-bottom: 1rem;
+  }
+
+  .buttons__container > button:nth-child(n+9) {
+    display: none;
+  }
 }

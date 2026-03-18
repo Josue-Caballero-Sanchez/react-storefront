@@ -6,13 +6,18 @@ import HomeItems from "../../components/homeItems/HomeItems";
 import { useEffect, useState } from "react";
 
 const BASE_API_URL = import.meta.env.VITE_API_URL;
+export type Category = {
+  id: string;
+  name: string;
+};
 
 function Home() {
   const [products, setProducts] = useState<any[]>([]);
   const [originalProducts, setOriginalProducts] = useState<any[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
-  const [activeFilterButton, setActiveFilterButton] = useState<string>("");
+  const [activeFilterButton, setActiveFilterButton] =
+    useState<string>("Recommended");
   const [activeSort, setActiveSort] = useState<string>("Featured");
 
   function sortProducts(sortBy: string) {
@@ -32,16 +37,16 @@ function Home() {
     sortProducts(sortBy);
   }
 
-  function handleFilterButtonClick(buttonName: string) {
-    if (activeFilterButton === buttonName) {
+  function handleFilterButtonClick(category: Category) {
+    if (activeFilterButton === category.name) {
       return;
     }
     if (errorMessage !== "") {
       setErrorMessage("");
     }
     setActiveSort("Featured");
-    setActiveFilterButton(buttonName);
-    fetchProducts(buttonName);
+    setActiveFilterButton(category.name);
+    fetchProducts(category.id);
   }
 
   async function fetchProducts(category: string): Promise<void> {
@@ -84,7 +89,7 @@ function Home() {
       <HomeHeroSection />
       <main className={styles.main}>
         <HomeFilters
-          activeButton={activeFilterButton}
+          activeFilterButton={activeFilterButton}
           handleFilterButtonClick={handleFilterButtonClick}
           itemCount={products.length}
           activeSort={activeSort}

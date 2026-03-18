@@ -71,7 +71,7 @@ function HomeHeroSection() {
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
-            ✨<p className={styles.icon__text}>Fragrances</p>
+            💻<p className={styles.icon__text}>Tech</p>
           </div>
         </div>
       </div>

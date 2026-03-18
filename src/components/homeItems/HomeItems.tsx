@@ -1,8 +1,10 @@
 import styles from "./HomeItems.module.css";
 import { useCartContext } from "../../contexts/CartContext";
+import { useFavoritesContext } from "../../contexts/FavoritesContext";
 import type { Item } from "../../contexts/CartContext";
 import { IoCartOutline } from "react-icons/io5";
 import { CiHeart } from "react-icons/ci";
+import { IoHeartDislikeOutline } from "react-icons/io5";
 import { ThreeDot } from "react-loading-indicators";
 import { TbFaceIdError } from "react-icons/tb";
 import { IoReload } from "react-icons/io5";
@@ -18,12 +20,21 @@ type HomeItemProps = {
 
 function HomeItems({ products, loading, errorMessage, reload }: HomeItemProps) {
   const cart = useCartContext();
+  const favorites = useFavoritesContext();
 
   function handleAddItemButton(item: Item) {
     if (!cart.isItemInCart(item.id, item.name)) {
       cart.addItemToCart(item);
     } else {
       cart.removeItemFromCart(item);
+    }
+  }
+
+  function handleFavoriteItemButton(item: Item) {
+    if (!favorites.isItemFavorite(item.id, item.name)) {
+      favorites.addFavoriteItem(item);
+    } else {
+      favorites.removeFavoriteItem(item);
     }
   }
 
@@ -128,9 +139,27 @@ function HomeItems({ products, loading, errorMessage, reload }: HomeItemProps) {
                   </span>
                 )}
               </button>
-              <button className={styles.favorite__button}>
-                <CiHeart />
-                Favorite
+              <button
+                className={styles.favorite__button}
+                onClick={(): void =>
+                  handleFavoriteItemButton({
+                    id: product.id,
+                    name: product.title,
+                    price: product.price,
+                  })
+                }
+              >
+                {favorites.isItemFavorite(product.id, product.title) ? (
+                  <span key="remove" className={styles.button__content}>
+                    <IoHeartDislikeOutline />
+                    Unfavorite
+                  </span>
+                ) : (
+                  <span key="add" className={styles.button__content}>
+                    <CiHeart />
+                    Favorite
+                  </span>
+                )}
               </button>
             </div>
           </div>

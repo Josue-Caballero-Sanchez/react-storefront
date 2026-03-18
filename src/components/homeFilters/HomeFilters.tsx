@@ -1,25 +1,43 @@
 import { useState, useEffect, useRef } from "react";
 import styles from "./HomeFilters.module.css";
 import { FaChevronDown } from "react-icons/fa";
+import type { Category } from "../../pages/home/Home";
 
-let filtersArray = [
+const filtersArray = [
   { id: "0", title: "Featured" },
   { id: "1", title: "Price: Low to High" },
   { id: "2", title: "Price: High to Low" },
   { id: "3", title: "Top Rated" },
 ];
 
+const categories = [
+  { id: "", name: "Recommended" },
+  { id: "groceries", name: "Groceries" },
+  { id: "beauty", name: "Beauty" },
+  { id: "fragrances", name: "Fragrances" },
+  { id: "home-decoration", name: "Home Decoration" },
+  { id: "furniture", name: "Furniture" },
+  { id: "kitchen-accessories", name: "Kitchen Accessories" },
+  { id: "laptops", name: "Laptops" },
+  { id: "smartphones", name: "Smartphones" },
+  { id: "mens-shirts", name: "Mens Shirts" },
+  { id: "mens-shoes", name: "Mens Shoes" },
+  { id: "tops", name: "Womens Tops" },
+  { id: "womens-shoes", name: "Womens Shoes" },
+  { id: "womens-bags", name: "Womens Bags" },
+];
+
 type HomeFiltersProps = {
-  activeButton: string;
+  activeFilterButton: string;
   itemCount: number;
-  handleFilterButtonClick(category: string): void;
+  handleFilterButtonClick(category: Category): void;
   activeSort: string;
   handleSortMenuChanged(sortby: string): void;
 };
 
 function HomeFilters({
-  activeButton,
-  handleFilterButtonClick: handleButtonClick,
+  activeFilterButton,
+  handleFilterButtonClick,
   itemCount,
   activeSort,
   handleSortMenuChanged,
@@ -49,40 +67,21 @@ function HomeFilters({
   return (
     <div id="filters">
       <div className={styles.buttons__container}>
-        <button
-          className={activeButton === "" ? styles.active : ""}
-          onClick={() => handleButtonClick("")}
-        >
-          Recommended
-        </button>
-        <button
-          className={activeButton === "Furniture" ? styles.active : ""}
-          onClick={() => handleButtonClick("Furniture")}
-        >
-          Furniture
-        </button>
-        <button
-          className={activeButton === "Beauty" ? styles.active : ""}
-          onClick={() => handleButtonClick("Beauty")}
-        >
-          Beauty
-        </button>
-        <button
-          className={activeButton === "Groceries" ? styles.active : ""}
-          onClick={() => handleButtonClick("Groceries")}
-        >
-          Groceries
-        </button>
-        <button
-          className={activeButton === "Fragrances" ? styles.active : ""}
-          onClick={() => handleButtonClick("Fragrances")}
-        >
-          Fragrances
-        </button>
+        {categories.map((category) => (
+          <button
+            key={category.id}
+            className={
+              activeFilterButton === category.name ? styles.active : ""
+            }
+            onClick={() => handleFilterButtonClick(category)}
+          >
+            {category.name}
+          </button>
+        ))}
       </div>
       <div className={styles.bottom__container}>
         <div className={styles.category__text}>
-          {activeButton === "" ? "Recommended" : activeButton}
+          {activeFilterButton}
           <p className={styles.count__text}>({itemCount})</p>
         </div>
         <div className={styles.sort__container}>
