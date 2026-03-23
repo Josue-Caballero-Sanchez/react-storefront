@@ -29,6 +29,7 @@ const categories = [
 
 type HomeFiltersProps = {
   activeFilterButton: string;
+  productMenuText: string;
   itemCount: number;
   handleFilterButtonClick(category: Category): void;
   activeSort: string;
@@ -37,6 +38,7 @@ type HomeFiltersProps = {
 
 function HomeFilters({
   activeFilterButton,
+  productMenuText,
   handleFilterButtonClick,
   itemCount,
   activeSort,
@@ -65,7 +67,7 @@ function HomeFilters({
   }, []);
 
   return (
-    <div id="filters">
+    <div>
       <div className={styles.buttons__container}>
         {categories.map((category) => (
           <button
@@ -81,7 +83,7 @@ function HomeFilters({
       </div>
       <div className={styles.bottom__container}>
         <div className={styles.category__text}>
-          {activeFilterButton}
+          {productMenuText}
           <p className={styles.count__text}>({itemCount})</p>
         </div>
         <div className={styles.sort__container}>

@@ -7,9 +7,9 @@ import { CiHeart } from "react-icons/ci";
 import { IoHeartDislikeOutline } from "react-icons/io5";
 import { ThreeDot } from "react-loading-indicators";
 import { TbFaceIdError } from "react-icons/tb";
-import { IoReload } from "react-icons/io5";
 import { VscError } from "react-icons/vsc";
 import { MdOutlineRemoveShoppingCart } from "react-icons/md";
+import { IoReloadOutline } from "react-icons/io5";
 
 type HomeItemProps = {
   products: any[];
@@ -59,7 +59,7 @@ function HomeItems({ products, loading, errorMessage, reload }: HomeItemProps) {
         <TbFaceIdError className={styles.error__icon} />
         <p className={styles.error__message}>{errorMessage}</p>
         <button className={styles.retry__button} onClick={reload}>
-          <IoReload /> Retry
+          <IoReloadOutline /> Retry
         </button>
       </div>
     );
@@ -71,7 +71,7 @@ function HomeItems({ products, loading, errorMessage, reload }: HomeItemProps) {
         <VscError className={styles.error__icon} />
         <p>No items found!</p>
         <button className={styles.retry__button} onClick={reload}>
-          <IoReload /> Reload
+          <IoReloadOutline /> Reload
         </button>
       </div>
     );

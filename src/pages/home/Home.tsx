@@ -18,6 +18,7 @@ function Home() {
   const [loading, setLoading] = useState<boolean>(true);
   const [activeFilterButton, setActiveFilterButton] =
     useState<string>("Recommended");
+  const [productMenuText, setProductMenuText] = useState<string>("Recommended");
   const [activeSort, setActiveSort] = useState<string>("Featured");
 
   function sortProducts(sortBy: string) {
@@ -46,6 +47,7 @@ function Home() {
     }
     setActiveSort("Featured");
     setActiveFilterButton(category.name);
+    setProductMenuText(category.name);
     fetchProducts(category.id);
   }
 
@@ -74,7 +76,8 @@ function Home() {
 
   function reloadAndReset() {
     setErrorMessage("");
-    setActiveFilterButton("");
+    setActiveFilterButton("Recommended");
+    setProductMenuText("Recommended");
     setActiveSort("Featured");
     fetchProducts("");
   }
@@ -85,11 +88,20 @@ function Home() {
 
   return (
     <>
-      <Header />
+      <Header
+        setProducts={setProducts}
+        setOriginalProducts={setOriginalProducts}
+        setLoading={setLoading}
+        setActiveFilterButton={setActiveFilterButton}
+        setProductMenuText={setProductMenuText}
+        setErrorMessage={setErrorMessage}
+        setActiveSort={setActiveSort}
+      />
       <HomeHeroSection />
       <main className={styles.main}>
         <HomeFilters
           activeFilterButton={activeFilterButton}
+          productMenuText={productMenuText}
           handleFilterButtonClick={handleFilterButtonClick}
           itemCount={products.length}
           activeSort={activeSort}

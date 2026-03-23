@@ -38,7 +38,7 @@ function HomeHeroSection() {
             This is not a commercial project. You can't buy any items here and
             all of the prices are generated to imitate a real store. Enjoy!
           </p>
-          <a href="#filters">Shop Now</a>
+          <a href="#shop">Shop Now</a>
         </div>
 
         <div className={styles.right__container}>
@@ -75,6 +75,7 @@ function HomeHeroSection() {
           </div>
         </div>
       </div>
+      <div id="shop"></div>
     </div>
   );
 }
