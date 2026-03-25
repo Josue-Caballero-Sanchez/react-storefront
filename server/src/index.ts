@@ -9,16 +9,22 @@ const app = express();
 const PORT = process.env.PORT;
 const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS?.split(",").map(origin => origin.trim());
 
+if (!ALLOWED_ORIGINS) {
+  console.error("Missing Environment variables");
+  process.exit(1);
+}
 
 // Middleware
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || ALLOWED_ORIGINS?.includes(origin)) {
-      callback(null, true);
+    if (!origin) {
+      return callback(new Error(`No origin header, request rejected`));
     }
-    else {
-      callback(new Error(`CORS blocked: ${origin} is not allowed`));
+    if (ALLOWED_ORIGINS.includes(origin)) {
+      return callback(null, true);
     }
+
+    return callback(new Error(`CORS blocked: ${origin} is not allowed`));
   },
   credentials: true,
 }));

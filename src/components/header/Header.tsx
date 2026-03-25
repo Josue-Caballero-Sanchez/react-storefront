@@ -5,69 +5,34 @@ import { IoCartOutline } from "react-icons/io5";
 import { useCartContext } from "../../contexts/CartContext";
 import { useFavoritesContext } from "../../contexts/FavoritesContext";
 import { IoIosSearch } from "react-icons/io";
-
-const BASE_API_URL = import.meta.env.VITE_API_URL;
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 type HeaderProps = {
-  setProducts(products: any[]): void;
-  setOriginalProducts(originalProducts: any[]): void;
-  setLoading(loading: boolean): void;
-  setErrorMessage(errorMessage: string): void;
-  setActiveFilterButton(activeFilterButton: string): void;
-  setProductMenuText(productMenuText: string): void;
-  setActiveSort(activeSort: string): void;
+  getSearchResults?(search: string): void;
 };
 
-function Header({
-  setProducts,
-  setLoading,
-  setErrorMessage,
-  setActiveFilterButton,
-  setProductMenuText,
-  setActiveSort,
-  setOriginalProducts,
-}: HeaderProps) {
+function Header({ getSearchResults }: HeaderProps) {
   const [isNavActive, setIsNavActive] = useState(false);
   const searchRef = useRef<HTMLInputElement>(null);
   const cart = useCartContext();
   const favorites = useFavoritesContext();
-
-  async function getSearchResults(search: string): Promise<void> {
-    setLoading(true);
-    setErrorMessage("");
-    setProductMenuText(search);
-    setActiveFilterButton("");
-    setActiveSort("Featured");
-    searchRef.current?.blur();
-
-    try {
-      const element = document.getElementById("shop");
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-      const response = await fetch(`${BASE_API_URL}/products/search/${search}`);
-
-      if (!response.ok) {
-        setLoading(false);
-        setErrorMessage("Failed to fetch products. Please try again later.");
-        return;
-      }
-
-      const data = await response.json();
-      setLoading(false);
-      setOriginalProducts(data);
-      setProducts(data);
-    } catch (error) {
-      setLoading(false);
-      setErrorMessage(
-        "An error occurred while fetching products. Please try again later.",
-      );
-    }
-  }
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   function handleSearch(): void {
-    const searchInput = document.getElementById("search") as HTMLInputElement;
-    getSearchResults(searchInput.value);
+    const searchInput = searchRef.current?.value;
+    if (!searchInput) {
+      return;
+    }
+
+    searchRef.current?.blur();
+
+    if (getSearchResults) {
+      navigate(`/?search=${searchInput}`);
+      getSearchResults(searchInput);
+    } else {
+      navigate(`/?search=${searchInput}`);
+    }
   }
 
   return (
@@ -79,15 +44,16 @@ function Header({
         ></div>
       )}
       <div className={styles.header__container}>
-        <a className={styles.logo} href="#">
+        <Link reloadDocument to="/" className={styles.logo}>
           Shopp
-        </a>
+        </Link>
         <div className={styles.search__container}>
           <input
             id="search"
             type="search"
             placeholder="Search products..."
             ref={searchRef}
+            defaultValue={searchParams.get("search") ?? ""}
             onKeyDown={(e) => {
               if (e.key === "Enter") handleSearch();
             }}
@@ -126,9 +92,9 @@ function Header({
               </div>
             )}
           </a>
-          <a
+          <Link
             className={styles.nav__item}
-            href="#"
+            to="/cart"
             onClick={(): void => setIsNavActive(false)}
           >
             <IoCartOutline />
@@ -138,7 +104,7 @@ function Header({
                 <p className={styles.item__count}>{cart.cartItems.length}</p>
               </div>
             )}
-          </a>
+          </Link>
         </nav>
 
         <button

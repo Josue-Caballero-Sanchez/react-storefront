@@ -4,6 +4,7 @@ import HomeHeroSection from "../../components/homeHeroSection/HomeHeroSection";
 import HomeFilters from "../../components/homeFilters/HomeFilters";
 import HomeItems from "../../components/homeItems/HomeItems";
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 const BASE_API_URL = import.meta.env.VITE_API_URL;
 export type Category = {
@@ -20,6 +21,7 @@ function Home() {
     useState<string>("Recommended");
   const [productMenuText, setProductMenuText] = useState<string>("Recommended");
   const [activeSort, setActiveSort] = useState<string>("Featured");
+  const [searchParams] = useSearchParams();
 
   function sortProducts(sortBy: string) {
     if (sortBy === "Featured") {
@@ -74,6 +76,38 @@ function Home() {
     }
   }
 
+  async function getSearchResults(search: string): Promise<void> {
+    const element = document.getElementById("shop");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    setLoading(true);
+    setErrorMessage("");
+    setProductMenuText(search);
+    setActiveFilterButton("");
+    setActiveSort("Featured");
+
+    try {
+      const response = await fetch(`${BASE_API_URL}/products/search/${search}`);
+
+      if (!response.ok) {
+        setLoading(false);
+        setErrorMessage("Failed to fetch products. Please try again later.");
+        return;
+      }
+
+      const data = await response.json();
+      setLoading(false);
+      setOriginalProducts(data);
+      setProducts(data);
+    } catch (error) {
+      setLoading(false);
+      setErrorMessage(
+        "An error occurred while fetching products. Please try again later.",
+      );
+    }
+  }
+
   function reloadAndReset() {
     setErrorMessage("");
     setActiveFilterButton("Recommended");
@@ -83,20 +117,17 @@ function Home() {
   }
 
   useEffect(() => {
-    fetchProducts("");
+    const searchInput = searchParams.get("search");
+    if (searchInput) {
+      getSearchResults(searchInput);
+    } else {
+      fetchProducts("");
+    }
   }, []);
 
   return (
     <>
-      <Header
-        setProducts={setProducts}
-        setOriginalProducts={setOriginalProducts}
-        setLoading={setLoading}
-        setActiveFilterButton={setActiveFilterButton}
-        setProductMenuText={setProductMenuText}
-        setErrorMessage={setErrorMessage}
-        setActiveSort={setActiveSort}
-      />
+      <Header getSearchResults={getSearchResults} />
       <HomeHeroSection />
       <main className={styles.main}>
         <HomeFilters
