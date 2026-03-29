@@ -1,0 +1,243 @@
+main {
+  max-width: 95rem;
+  margin: 0 auto;
+  padding: 1.75rem;
+  color: black;
+  font-size: 1.6rem;
+}
+
+.heading__text {
+  font-size: 2.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.center__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10rem;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.center__container > p {
+  color: gray;
+  font-size: 2.4rem;
+}
+
+.icon {
+  font-size: 5rem;
+}
+
+.return__button {
+  background-color: #0071E3;
+  border: none;
+  padding: 1rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  border-radius: 2.5rem;
+  color: white;
+  text-decoration: none;
+
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.return__button:hover {
+  cursor: pointer;
+  opacity: 0.7;
+  transform: translateY(-1.5px);
+}
+
+.items__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 2rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.item {
+  background-color: rgb(235, 235, 235);
+  border-radius: 2.5rem;
+  color: black;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  max-height: 45rem;
+
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.item:hover {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transform: translateY(-1.5px);
+}
+
+.item:hover .title__text {
+  color: #0071E3;
+}
+
+.item__details {
+  padding: 1.25rem;
+  font-size: 1.6rem;
+  background-color: white;
+  border-bottom-left-radius: 2.5rem;
+  border-bottom-right-radius: 2.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item__details button {
+  background-color: #0071E3;
+  color: white;
+  border: none;
+  padding: 0.55rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  overflow: hidden; 
+}
+
+.item__details button:hover {
+  opacity: 0.7;
+}
+
+.item__details .disabled__button {
+  background-color: gray;
+}
+
+.button__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  animation: fadeSlideIn 0.25s ease forwards;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.category__text {
+  font-size: 1.2rem;
+  color: gray;
+  margin-bottom: 0.5rem;
+}
+
+.rating__text {
+  font-size: 1.2rem;
+  color: gray;
+}
+
+.shipping__text {
+  font-size: 1.2rem;
+  color: gray;
+  margin-bottom: 1rem;
+}
+
+.price__container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.original__price {
+  color: gray;
+  text-decoration: line-through;
+  font-size: 1.2rem;
+}
+
+.discount__text {
+  font-size: 1.3rem;
+  color: red;
+}
+
+.buttons__container {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.info__text__container {
+  color: gray;
+  font-size: 1.6rem;
+}
+
+.buttons__container > .button,
+.buttons__container > button {
+  background-color: #0071E3;
+  color: white;
+  border: none;
+  padding: 0.55rem;
+  border-radius: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  gap: 1rem;
+  flex: 1;
+
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.buttons__container > .button:hover,
+.buttons__container > button:hover {
+  cursor: pointer;
+  opacity: 0.7;
+  transform: translateY(-1.5px);
+}
+
+.buttons__container > button:nth-child(2) {
+  background-color: #CC0C39;
+}
+
+@media (max-width: 950px) {
+  .items__container {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .item {
+    max-height: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .items__container {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .item:hover {
+    box-shadow: none;
+    transform: translateY(0);
+  }
+
+  .item:hover .title__text {
+    color: black;
+  }
+
+  .buttons__container {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .items__container {
+    grid-template-columns: 1fr;
+  }
+}

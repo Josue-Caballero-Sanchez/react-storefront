@@ -3,6 +3,12 @@ import { createContext, useContext } from "react";
 export type Item = {
   id: number;
   name: string;
+  imageURL: string;
+  category: string;
+  rating: string;
+  shippingInfo: string;
+  discountPrice: string;
+  discountPercentage: string;
   price: number;
 };
 
@@ -10,6 +16,7 @@ export type Cart = {
   cartItems: Item[];
   addItemToCart(item: Item): void;
   removeItemFromCart(item: Item): void;
+  removeAllItemsFromCart(): void;
   isItemInCart(itemId: number, itemName: string): boolean;
 };
 

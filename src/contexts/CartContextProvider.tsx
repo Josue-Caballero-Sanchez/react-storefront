@@ -21,6 +21,10 @@ export const CartContextProvider = ({
     );
   }
 
+  function removeAllItemsFromCart() {
+    setCartItems([]);
+  }
+
   function isItemInCart(itemId: number, itemName: string) {
     return cartItems.some(
       (cartItem) => cartItem.id === itemId && cartItem.name === itemName,
@@ -29,9 +33,10 @@ export const CartContextProvider = ({
 
   const cart: Cart = {
     cartItems: cartItems,
-    addItemToCart: addItemToCart,
-    removeItemFromCart: removeItemFromCart,
-    isItemInCart: isItemInCart,
+    addItemToCart,
+    removeItemFromCart,
+    removeAllItemsFromCart,
+    isItemInCart,
   };
   return <CartContext value={cart}>{children}</CartContext>;
 };

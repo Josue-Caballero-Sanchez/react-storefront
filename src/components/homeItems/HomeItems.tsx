@@ -123,6 +123,16 @@ function HomeItems({ products, loading, errorMessage, reload }: HomeItemProps) {
                   handleAddItemButton({
                     id: product.id,
                     name: product.title,
+                    imageURL: product.images[0],
+                    category: product.category.toUpperCase(),
+                    rating: product.rating + "/5",
+                    shippingInfo: product.shippingInformation,
+                    discountPrice: (
+                      product.price *
+                      (product.discountPercentage / 100 + 1)
+                    ).toFixed(2),
+                    discountPercentage:
+                      "-" + product.discountPercentage.toFixed(2) + "%",
                     price: product.price,
                   })
                 }
@@ -145,6 +155,16 @@ function HomeItems({ products, loading, errorMessage, reload }: HomeItemProps) {
                   handleFavoriteItemButton({
                     id: product.id,
                     name: product.title,
+                    imageURL: product.images[0],
+                    category: product.category.toUpperCase(),
+                    rating: product.rating + "/5",
+                    shippingInfo: product.shippingInformation,
+                    discountPrice: (
+                      product.price *
+                      (product.discountPercentage / 100 + 1)
+                    ).toFixed(2),
+                    discountPercentage:
+                      "-" + product.discountPercentage.toFixed(2) + "%",
                     price: product.price,
                   })
                 }

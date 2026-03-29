@@ -5,7 +5,12 @@ import { IoCartOutline } from "react-icons/io5";
 import { useCartContext } from "../../contexts/CartContext";
 import { useFavoritesContext } from "../../contexts/FavoritesContext";
 import { IoIosSearch } from "react-icons/io";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  useSearchParams,
+  useLocation,
+} from "react-router-dom";
 
 type HeaderProps = {
   getSearchResults?(search: string): void;
@@ -18,6 +23,19 @@ function Header({ getSearchResults }: HeaderProps) {
   const favorites = useFavoritesContext();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const location = useLocation();
+
+  function handleShopButton() {
+    if (location.pathname === "/") {
+      document.getElementById("shop")?.scrollIntoView({ behavior: "smooth" });
+      console.log("In root!");
+    } else {
+      navigate("/");
+      setTimeout(() => {
+        document.getElementById("shop")?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    }
+  }
 
   function handleSearch(): void {
     const searchInput = searchRef.current?.value;
@@ -44,7 +62,7 @@ function Header({ getSearchResults }: HeaderProps) {
         ></div>
       )}
       <div className={styles.header__container}>
-        <Link reloadDocument to="/" className={styles.logo}>
+        <Link to="/" className={styles.logo}>
           Shopp
         </Link>
         <div className={styles.search__container}>
@@ -69,14 +87,16 @@ function Header({ getSearchResults }: HeaderProps) {
           </div>
         </div>
         <nav className={isNavActive ? styles.nav__active : ""}>
-          <a
+          <button
             className={styles.nav__item}
-            href="#shop"
-            onClick={(): void => setIsNavActive(false)}
+            onClick={(): void => {
+              setIsNavActive(false);
+              handleShopButton();
+            }}
           >
             <CiShoppingTag />
             <p>Shop</p>
-          </a>
+          </button>
           <a
             className={styles.nav__item}
             href="#"

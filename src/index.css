@@ -83,3 +83,9 @@ html {
   color: white;
   font-size: 62.5%;
 }
+
+@media (min-width: 1500px) {
+  :root {
+    font-size: 69.5%;
+  }
+}
