@@ -16,6 +16,7 @@
   background-color: lightgray;
   cursor: pointer;
   border-radius: 1.5rem;
+  color: black;
 }
 
 .buttons__container > button:hover {
