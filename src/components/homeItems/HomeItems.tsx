@@ -10,6 +10,7 @@ import { TbFaceIdError } from "react-icons/tb";
 import { VscError } from "react-icons/vsc";
 import { MdOutlineRemoveShoppingCart } from "react-icons/md";
 import { IoReloadOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 type HomeItemProps = {
   products: any[];
@@ -80,7 +81,11 @@ function HomeItems({ products, loading, errorMessage, reload }: HomeItemProps) {
   return (
     <div className={styles.container}>
       {products.map((product) => (
-        <div key={product.id} className={styles.item}>
+        <Link
+          key={product.id}
+          className={styles.item}
+          to={`product/${product.id}`}
+        >
           <img src={product.images[0]} alt={`${product.title} thumbnail`} />
           <div className={styles.item__details}>
             <p className={styles.category__text}>
@@ -119,7 +124,9 @@ function HomeItems({ products, loading, errorMessage, reload }: HomeItemProps) {
                     ? styles.disabled__button
                     : ""
                 }
-                onClick={(): void =>
+                onClick={(e): void => {
+                  e.preventDefault();
+                  e.stopPropagation();
                   handleAddItemButton({
                     id: product.id,
                     name: product.title,
@@ -134,8 +141,8 @@ function HomeItems({ products, loading, errorMessage, reload }: HomeItemProps) {
                     discountPercentage:
                       "-" + product.discountPercentage.toFixed(2) + "%",
                     price: product.price,
-                  })
-                }
+                  });
+                }}
               >
                 {cart.isItemInCart(product.id, product.title) ? (
                   <span key="remove" className={styles.button__content}>
@@ -151,7 +158,9 @@ function HomeItems({ products, loading, errorMessage, reload }: HomeItemProps) {
               </button>
               <button
                 className={styles.favorite__button}
-                onClick={(): void =>
+                onClick={(e): void => {
+                  e.preventDefault();
+                  e.stopPropagation();
                   handleFavoriteItemButton({
                     id: product.id,
                     name: product.title,
@@ -166,8 +175,8 @@ function HomeItems({ products, loading, errorMessage, reload }: HomeItemProps) {
                     discountPercentage:
                       "-" + product.discountPercentage.toFixed(2) + "%",
                     price: product.price,
-                  })
-                }
+                  });
+                }}
               >
                 {favorites.isItemFavorite(product.id, product.title) ? (
                   <span key="remove" className={styles.button__content}>
@@ -183,7 +192,7 @@ function HomeItems({ products, loading, errorMessage, reload }: HomeItemProps) {
               </button>
             </div>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );

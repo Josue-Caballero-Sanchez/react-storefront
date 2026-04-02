@@ -37,6 +37,23 @@ router.get('/search/:searchInput', async (req: Request, res: Response): Promise<
   }
 })
 
+router.get('/product/:productId', async (req: Request, res: Response): Promise<void> => {
+  try {
+    const response = await fetch(`https://dummyjson.com/products/${req.params.productId}`);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    res.send(data);
+  }
+  catch (error) {
+    console.error("Error fetching products: ", error);
+    res.status(500).send("Failed to fetch product");
+  }
+})
+
 router.get('/:category', async (req: Request, res: Response): Promise<void> => {
   try {
     const response = await fetch(`https://dummyjson.com/products/category/${req.params.category}`);

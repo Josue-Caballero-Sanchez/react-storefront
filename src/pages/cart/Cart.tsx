@@ -67,7 +67,11 @@ function Cart() {
         </p>
         <div className={styles.items__container}>
           {cart.cartItems.map((product) => (
-            <div key={product.id} className={styles.item}>
+            <Link
+              key={product.id}
+              className={styles.item}
+              to={`/product/${product.id}`}
+            >
               <img src={product.imageURL} alt={`${product.name} thumbnail`} />
               <div className={styles.item__details}>
                 <p className={styles.category__text}>{product.category}</p>
@@ -90,7 +94,9 @@ function Cart() {
                 <div>
                   <button
                     className={styles.disabled__button}
-                    onClick={(): void =>
+                    onClick={(e): void => {
+                      e.preventDefault();
+                      e.stopPropagation();
                       handleAddItemButton({
                         id: product.id,
                         name: product.name,
@@ -101,8 +107,8 @@ function Cart() {
                         discountPrice: product.discountPrice,
                         discountPercentage: product.discountPercentage,
                         price: product.price,
-                      })
-                    }
+                      });
+                    }}
                   >
                     {cart.isItemInCart(product.id, product.name) ? (
                       <span key="remove" className={styles.button__content}>
@@ -118,7 +124,7 @@ function Cart() {
                   </button>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
         <div className={styles.info__text__container}>

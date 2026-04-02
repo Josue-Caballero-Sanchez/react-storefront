@@ -7,6 +7,7 @@ import "./index.css";
 import Home from "./pages/home/Home";
 import Cart from "./pages/cart/Cart";
 import OrderedPage from "./pages/orderedPage/OrderedPage";
+import Product from "./pages/product/Product";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "/checkout",
     element: <OrderedPage />,
+  },
+  {
+    path: "/product/:productId",
+    element: <Product />,
   },
 ]);
 
