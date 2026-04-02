@@ -89,7 +89,7 @@
 .original__price {
   color: gray;
   text-decoration: line-through;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
 }
 
 .discount__text {
@@ -199,5 +199,9 @@
 @media (max-width: 768px) {
   .main__container {
     flex-direction: column;
+  }
+
+  .button__container button {
+    font-size: 1.8rem;
   }
 }

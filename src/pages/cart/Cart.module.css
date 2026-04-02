@@ -134,18 +134,18 @@ main {
 }
 
 .category__text {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: gray;
   margin-bottom: 0.5rem;
 }
 
 .rating__text {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: gray;
 }
 
 .shipping__text {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: gray;
   margin-bottom: 1rem;
 }
@@ -160,7 +160,7 @@ main {
 .original__price {
   color: gray;
   text-decoration: line-through;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
 }
 
 .discount__text {
@@ -234,6 +234,15 @@ main {
   .buttons__container {
     flex-direction: column;
     gap: 0.5rem;
+  }
+
+  .buttons__container > .button,
+  .buttons__container > button {
+    font-size: 1.8rem;
+  }
+
+  .item__details button {
+    font-size: 1.8rem;
   }
 }
 

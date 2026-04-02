@@ -89,4 +89,10 @@
     font-size: 6rem;
     padding: 1rem;
   }
+
+  .left__container > a {
+    padding: 1.25rem;
+    padding-left: 3.5rem;
+    padding-right: 3.5rem;
+  }   
 } 
