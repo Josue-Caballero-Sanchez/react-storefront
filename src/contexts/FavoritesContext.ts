@@ -5,6 +5,7 @@ export type Favorites = {
   favoriteItems: Item[];
   addFavoriteItem(item: Item): void;
   removeFavoriteItem(item: Item): void;
+  removeAllFavoriteItems(): void;
   isItemFavorite(itemId: number, itemName: string): boolean;
 }
 

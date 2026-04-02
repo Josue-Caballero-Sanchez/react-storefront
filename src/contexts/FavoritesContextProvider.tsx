@@ -22,6 +22,10 @@ export const FavoritesContextProvider = ({
     );
   }
 
+  function removeAllFavoriteItems(): void {
+    setFavoriteItems([]);
+  }
+
   function isItemFavorite(itemId: number, itemName: string) {
     return favoriteItems.some(
       (favoriteItem) =>
@@ -33,6 +37,7 @@ export const FavoritesContextProvider = ({
     favoriteItems,
     addFavoriteItem,
     removeFavoriteItem,
+    removeAllFavoriteItems,
     isItemFavorite,
   };
   return <FavoritesContext value={favorites}>{children}</FavoritesContext>;

@@ -97,9 +97,9 @@ function Header({ getSearchResults }: HeaderProps) {
             <CiShoppingTag />
             <p>Shop</p>
           </button>
-          <a
+          <Link
             className={styles.nav__item}
-            href="#"
+            to="/favorites"
             onClick={(): void => setIsNavActive(false)}
           >
             <CiHeart />
@@ -111,7 +111,7 @@ function Header({ getSearchResults }: HeaderProps) {
                 </p>
               </div>
             )}
-          </a>
+          </Link>
           <Link
             className={styles.nav__item}
             to="/cart"
