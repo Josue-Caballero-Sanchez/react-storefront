@@ -240,10 +240,12 @@ main {
   .buttons__container > .button,
   .buttons__container > button {
     font-size: 1.8rem;
+    padding: 0.65rem;
   }
 
   .item__details button {
     font-size: 1.8rem;
+    padding: 0.65rem;
   }
 }
 
