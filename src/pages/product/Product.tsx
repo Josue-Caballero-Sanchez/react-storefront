@@ -35,7 +35,7 @@ function Product() {
 
       if (!response.ok) {
         setLoading(false);
-        setErrorMessage("Failed to fetch products. Please try again later.");
+        setErrorMessage("Failed to fetch product. Please try again later.");
         return;
       }
 
