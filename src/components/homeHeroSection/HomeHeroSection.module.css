@@ -34,7 +34,7 @@
   align-self: flex-start;
   background-color: #0071E3;
   border: none;
-  padding: 1.25rem;
+  padding: 1.1rem;
   padding-left: 3.5rem;
   padding-right: 3.5rem;
   border-radius: 3rem;
@@ -92,6 +92,7 @@
 
   .left__container > a {
     font-size: 1.8rem;
+    padding: 1.3rem;
     padding-left: 4rem;
     padding-right: 4rem;
   }   
